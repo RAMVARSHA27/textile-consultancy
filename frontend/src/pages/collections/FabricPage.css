@@ -20,7 +20,7 @@ body {
   align-items: center;
   background-color: #000;
   color: #fff;
-  padding: 10px 24px;
+  padding: 1rem 2rem;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -219,3 +219,40 @@ body {
   margin-right: 0.5rem;
   color: white; /* or your desired icon color */
 }
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  background-color:  #0062cc;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.action-btn:hover {
+  background-color: #0062cc;
+}
+
+.action-btn.order {
+  background-color:  #179f2e;
+}
+
+.action-btn.order:hover {
+  background-color: #179f2e;
+}
+
+.action-btn.added {
+  background-color: #c1386e;
+  cursor: not-allowed;
+}
+
