@@ -24,12 +24,11 @@ const Login = () => {
     if (res.ok) {
       alert('Login successful');
 
-      // Optional: Save user info in localStorage
       localStorage.setItem('client', JSON.stringify(data.client));
 
-      // Redirect based on email domain
+      
       if (formData.email.endsWith('@admin.com')) {
-        navigate('/admin'); // ✅ match App.jsx
+        navigate('/admin');
       } else {
         navigate('/');
       }

@@ -1,0 +1,42 @@
+/* src/components/AdminNavbar.css */
+.admin-navbar {
+   
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 20px;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  
+  .admin-navbar ul {
+    display: flex;
+    justify-content: center; /* Center the navbar items */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .admin-navbar li {
+    margin: 0 30px;
+  }
+  
+  .admin-navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+
+  .admin-navbar a:hover {
+    background-color: #f4a261;
+  }
+
+  .admin-navbar a.active {
+    background-color: #f4a261; /* Rust orange for active link */
+    color: white;
+  }
+  

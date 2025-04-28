@@ -1,0 +1,80 @@
+/* src/pages/admin/FabricManager.css */
+.fabric-manager {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .main-content {
+    margin-left: 260px;
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #f4a261; /* Rust Orange */
+  }
+  
+  .add-fabric-form {
+    margin-top: 20px;
+    background-color: #444;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .add-fabric-form input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 200px;
+    border: 1px solid #f4a261;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+  }
+  
+  .add-fabric-form button {
+    background-color: #f4a261;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .add-fabric-form button:hover {
+    background-color: #e08541;
+  }
+  
+  .fabrics-list table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  .fabrics-list table th, .fabrics-list table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #f4a261;
+  }
+  
+  .fabrics-list table th {
+    background-color: #444;
+  }
+  
+  .fabrics-list table td {
+    background-color: #333;
+  }
+  
+  button {
+    background-color: #f4a261;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e08541;
+  }
+  

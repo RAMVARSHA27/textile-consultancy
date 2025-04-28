@@ -18,7 +18,7 @@ const Navbar = ({ showSearch }) => {
 
       <ul className="nav-links">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/fabric/cotton">Fabric Collections</Link></li>
+        <li><Link to="/fabric/trending">Fabric Collections</Link></li>
         <li><Link to="/cart">Cart</Link></li>
         <li><Link to="/profile">Profile</Link></li>
       </ul>
