@@ -1,18 +1,50 @@
-// src/components/AdminNavbar.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './AdminNavbar.css'; // Ensure the correct path to your CSS
+import { NavLink, useLocation } from "react-router-dom";
+import "./AdminNavbar.css";
 
-const AdminNavbar = () => {
+function AdminNavbar() {
+  const location = useLocation();
+
   return (
     <nav className="admin-navbar">
       <ul>
-        <li><Link to="/admin">Dashboard</Link></li>
-        <li><Link to="/admin/fabric">Manage Fabrics</Link></li>
-        <li><Link to="/admin/orders">Manage Orders</Link></li>
+        <li>
+          <NavLink
+            to="/admin"
+            className={({ isActive }) =>
+              location.pathname === "/admin" ? "active" : ""
+            }
+          >
+            Dashboard
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/admin/fabrics"
+            className={({ isActive }) =>
+              location.pathname === "/admin/fabrics" ? "active" : ""
+            }
+          >
+            Manage Fabrics
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/admin/orders"
+            className={({ isActive }) =>
+              location.pathname === "/admin/orders" ? "active" : ""
+            }
+          >
+            Manage Orders
+          </NavLink>
+        </li>
       </ul>
+      <div className="logout-container">
+        <button onClick={() => (window.location.href = "http://localhost:5173")}>
+          Logout
+        </button>
+      </div>
     </nav>
   );
-};
+}
 
 export default AdminNavbar;

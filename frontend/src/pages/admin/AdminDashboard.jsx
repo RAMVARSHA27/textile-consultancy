@@ -1,7 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from 'recharts';
 import AdminNavbar from '../../components/AdminNavbar';
 import AdminFooter from '../../components/AdminFooter';
 import '../admin/AdminDashboard.css';
@@ -17,7 +28,7 @@ const AdminDashboard = () => {
     monthlyOrders: [],
   });
 
-  const location = useLocation(); // <-- detect current route
+  const location = useLocation();
 
   useEffect(() => {
     const fetchSummary = async () => {
@@ -44,35 +55,30 @@ const AdminDashboard = () => {
   }));
 
   function getMonthName(monthNumber) {
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return months[monthNumber - 1];
   }
 
+  const handleLogout = () => {
+    window.location.href = 'http://localhost:5173';
+  };
+
   return (
     <div className="admin-dashboard">
+
       <AdminNavbar />
       <main className="admin-dashboard-content">
-        
-        {/* Only show graphs and cards if we are exactly on /admin */}
         {location.pathname === '/admin' && (
           <>
-            {/* Orders Summary Section */}
             <div className="orders-summary">
               <h3>Orders Summary</h3>
               <div className="dashboard-cards">
-                <div className="card">
-                  Total Orders: <span>{summary.totalOrders}</span>
-                </div>
-                <div className="card">
-                  Pending Orders: <span>{summary.pendingOrders}</span>
-                </div>
-                <div className="card">
-                  Completed Orders: <span>{summary.completedOrders}</span>
-                </div>
+                <div className="card">Total Orders: <span>{summary.totalOrders}</span></div>
+                <div className="card">Pending Orders: <span>{summary.pendingOrders}</span></div>
+                <div className="card">Completed Orders: <span>{summary.completedOrders}</span></div>
               </div>
             </div>
 
-            {/* Charts Section */}
             <div className="charts-section">
               <div className="chart-box">
                 <h3>Order Status</h3>
@@ -104,9 +110,7 @@ const AdminDashboard = () => {
           </>
         )}
 
-        {/* Always render the nested page (Manage Fabrics / Orders) */}
         <Outlet />
-
       </main>
       <AdminFooter />
     </div>

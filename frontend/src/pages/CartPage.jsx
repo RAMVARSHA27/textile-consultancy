@@ -1,71 +1,41 @@
-// src/pages/CartPage.jsx
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
 import { useCart } from "../context/CartContext";
-import Navbar from "../components/Navbar";
-import "./CartPage.css";
 
 const CartPage = () => {
-  const { cartItems, removeFromCart, updateQuantity } = useCart();
-  const navigate = useNavigate();
+  const { cart } = useCart(); // Assuming cart is provided by context
+  const cartItems = cart?.items || []; // Safe fallback to empty array if cart or items is undefined
 
-  const getTotal = () => {
-    return cartItems.reduce((total, item) => {
-      const price = parseInt(item.price.replace(/[^\d]/g, ""));
-      return total + price * (item.quantity || 1);
-    }, 0);
-  };
-
-  const handleCheckout = () => {
-    navigate("/order", { state: { items: cartItems } });
-  };
+  if (cartItems.length === 0) {
+    return (
+      <div>
+        <h1>Your cart is empty.</h1>
+        <p>It looks like you haven't added anything to your cart yet.</p>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <Navbar />
-      <div className="cart-page">
-        <h2 className="cart-title">My Cart</h2>
-
-        {cartItems.length === 0 ? (
-          <p className="empty-msg">Your cart is empty.</p>
-        ) : (
-          <div className="cart-items">
-            {cartItems.map((item, index) => (
-              <div className="cart-item" key={index}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="cart-item-image"
-                />
-                <div className="cart-details">
-                  <h4>{item.name}</h4>
-                  <p>{item.price}</p>
-                </div>
-
-                <div className="cart-actions">
-                  <div className="quantity">
-                    <button onClick={() => updateQuantity(index, -1)}>-</button>
-                    <span>{item.quantity || 1}</span>
-                    <button onClick={() => updateQuantity(index, 1)}>+</button>
-                  </div>
-                  <button
-                    className="remove-btn"
-                    onClick={() => removeFromCart(item.name)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            <div className="cart-summary">
-              <h3>Total: ₹{getTotal()}</h3>
-              <button className="checkout-btn" onClick={handleCheckout}>
-                Proceed to Checkout
-              </button>
+    <div className="cart-page">
+      <h1>Your Cart</h1>
+      <ul className="cart-items">
+        {cartItems.map((item) => (
+          <li key={item.id} className="cart-item">
+            <img src={item.imageURL} alt={item.name} className="cart-item-image" />
+            <div className="cart-item-details">
+              <span className="cart-item-name">{item.name}</span>
+              <span className="cart-item-price">{`$${item.price.toFixed(2)}`}</span>
             </div>
-          </div>
-        )}
+          </li>
+        ))}
+      </ul>
+      <div className="cart-summary">
+        <h2>Cart Summary</h2>
+        <p>Total items: {cartItems.length}</p>
+        <p>
+          Total Price: $
+          {cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}
+        </p>
+        <button onClick={() => alert('Proceeding to checkout')}>Proceed to Checkout</button>
       </div>
     </div>
   );

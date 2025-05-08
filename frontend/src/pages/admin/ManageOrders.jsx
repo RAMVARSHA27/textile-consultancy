@@ -46,7 +46,7 @@ const ManageOrders = () => {
             {orders.map((order) => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.customerName}</td>
+                <td>{order.clientName}</td>
                 <td>{new Date(order.createdAt).toLocaleDateString()}</td>
                 <td>{order.status}</td>
                 <td>

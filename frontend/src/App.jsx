@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 // User pages
 import Home from './pages/Home';
@@ -15,14 +16,14 @@ import OrderPage from './pages/OrderPage';
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard';
-
 import FabricManager from './pages/admin/FabricManager';
 import ManageOrders from "./pages/admin/ManageOrders";
 
-
 function App() {
   return (
-    <Router>
+    <>
+      <Toaster position="top-right" reverseOrder={false} />
+
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
@@ -45,13 +46,11 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/admin/*" element={<AdminDashboard />}>
-          
-          <Route path="fabric" element={<FabricManager />} />
+          <Route path="fabrics" element={<FabricManager />} />
           <Route path="orders" element={<ManageOrders />} />
-
         </Route>
       </Routes>
-    </Router>
+    </>
   );
 }
 

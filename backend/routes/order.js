@@ -1,21 +1,60 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order");
+const Product=require("../models/Product")
 
-// POST /api/orders --> Place a new order
+// ✅ ADD THIS BLOCK ONLY: POST /api/orders --> Place a new order
 router.post("/", async (req, res) => {
   try {
-    console.log("Received order:", req.body);
-    const order = new Order(req.body);
-    await order.save();
-    res.status(201).json({ message: "Order placed successfully" });
-  } catch (err) {
-    console.error("Error saving order:", err);
-    res.status(500).json({ message: "Order placement failed" });
+    const orderData = req.body;
+
+    if (!orderData.quantity || !orderData.design) {
+      return res.status(400).json({ error: "Missing required order fields" });
+    }
+
+    const newOrder = new Order(orderData);
+    await newOrder.save();
+
+    res.status(201).json({ message: "Order placed successfully", order: newOrder });
+  } catch (error) {
+    console.error("Error placing order:", error);
+    res.status(500).json({ error: "Failed to place order" });
   }
 });
 
-// GET /api/orders/dashboard-summary --> Admin dashboard data
+// Existing routes below (unchanged)
+
+router.patch('/update-status/:orderId', async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+  try {
+    const order = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    res.json(order);
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    res.status(500).json({ error: "Failed to fetch orders" });
+  }
+});
+
 router.get("/dashboard-summary", async (req, res) => {
   try {
     const totalOrders = await Order.countDocuments();
@@ -46,4 +85,32 @@ router.get("/dashboard-summary", async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  console.log("Incoming Order Payload:", req.body);
+
+  const { clientName, address, phone, items } = req.body;
+
+  // Validate fields
+  if (!clientName || !address || !phone || !Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ message: "Missing or invalid fields" });
+  }
+
+  try {
+    const newOrder = new Order({
+      clientName,
+      address,
+      phone,
+      items,
+    });
+
+    const savedOrder = await newOrder.save();
+    res.status(201).json({ message: "Order placed successfully", order: savedOrder });
+  } catch (error) {
+    console.error("Error saving order:", error);
+    res.status(500).json({ message: "Failed to place order" });
+  }
+});
+
 module.exports = router;
+
+

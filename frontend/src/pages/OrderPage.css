@@ -111,6 +111,22 @@
     }
   }
 
+  .existing-orders {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+  }
+  
+  .existing-order-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+  }
+  
+
   .order-item-block {
     margin-top: 2.5rem;
     border-top: 1px solid #ddd;
